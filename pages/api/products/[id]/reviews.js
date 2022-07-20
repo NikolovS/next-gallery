@@ -9,9 +9,9 @@ import { isAuth } from '../../../../utils/auth';
 const router = createRouter();
 
 router.get(async (req, res) => {
-  db.connect();
+  await db.connect();
   const product = await Product.findById({ _id: req.query.id });
-  db.disconnect();
+  await db.disconnect();
   if (product) {
     res.send(product.reviews);
   } else {
