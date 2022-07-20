@@ -58,14 +58,6 @@ const orderSchema = new (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema)
         country: {
             type: String,
             required: true
-        },
-        location: {
-            lat: String,
-            lng: String,
-            address: String,
-            name: String,
-            vicinity: String,
-            googleAddressId: String
         }
     },
     paymentMethod: {

@@ -26,9 +26,7 @@ const initialState = {
     darkMode: js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get("darkMode") === "ON" ? true : false,
     cart: {
         cartItems: js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get("cartItems") ? JSON.parse(js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get("cartItems")) : [],
-        shippingAddress: js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get("shippingAddress") ? JSON.parse(js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get("shippingAddress")) : {
-            location: {}
-        },
+        shippingAddress: js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get("shippingAddress") ? JSON.parse(js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get("shippingAddress")) : {},
         paymentMethod: js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get("paymentMethod") ? js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get("paymentMethod") : ""
     },
     userInfo: js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get("userInfo") ? JSON.parse(js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get("userInfo")) : null
@@ -79,32 +77,15 @@ function reducer(state, action) {
                 ...state,
                 cart: {
                     ...state.cart,
-                    shippingAddress: {
-                        ...state.cart.shippingAddress,
-                        ...action.payload
-                    }
-                }
-            };
-        case "SAVE_SHIPPING_ADDRESS_MAP_LOCATION":
-            return {
-                ...state,
-                cart: {
-                    ...state.cart,
-                    shippingAddress: {
-                        ...state.cart.shippingAddress,
-                        location: action.payload
-                    }
+                    shippingAddress: action.payload
                 }
             };
         case "SAVE_PAYMENT_METHOD":
             return {
                 ...state,
                 cart: {
-                    cartItems: [],
-                    shippingAddress: {
-                        location: {}
-                    },
-                    paymentMethod: ""
+                    ...state.cart,
+                    paymentMethod: action.payload
                 }
             };
         case "CART_CLEAR":

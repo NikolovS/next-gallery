@@ -182,7 +182,6 @@ function Order({ params  }) {
         error: ""
     });
     const { shippingAddress , paymentMethod , orderItems , itemsPrice , taxPrice , shippingPrice , totalPrice , deliveredAt , isDelivered , isPaid , paidAt ,  } = order;
-    console.log(order);
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         if (!userInfo) {
             return router.push("/login");
@@ -935,7 +934,7 @@ module.exports = import("js-cookie");;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2952,1664,5152,5675,8766,1282,5789], () => (__webpack_exec__(5637)));
+var __webpack_exports__ = __webpack_require__.X(0, [2952,1664,5152,5675,8766,5789], () => (__webpack_exec__(5637)));
 module.exports = __webpack_exports__;
 
 })();
