@@ -12,17 +12,18 @@ router.use(isAuth, isAdmin).get(async (req, res) => {
   res.send(product);
 });
 
-router.put(async (req, res) => {
+router.use(isAuth, isAdmin).put(async (req, res) => {
   await db.connect();
   const product = await Product.findById({ _id: req.query.id });
+  console.log(product);
   if (product) {
     product.name = req.body.name;
     product.slug = req.body.slug;
     product.price = req.body.price;
     product.category = req.body.category;
     product.image = req.body.image;
-    product.featuredImage = req.body.featuredImage;
-    product.isFeatured = req.body.isFeatured;
+    product.featuredImage = req.body.featuredImage || '';
+    product.isFeatured = req.body.isFeatured || false;
     product.brand = req.body.brand;
     product.countInStock = req.body.countInStock;
     product.description = req.body.description;

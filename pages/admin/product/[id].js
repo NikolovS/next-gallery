@@ -55,8 +55,8 @@ function reducer(state, action) {
 
 function ProductEdit({ params }) {
   const productId = params.id;
-  const [isFeatured, setIsFeatured] = useState(false);
   const { state } = useContext(Store);
+  const [isFeatured, setIsFeatured] = useState(false);
   const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
     useReducer(reducer, {
       loading: true,
@@ -88,10 +88,10 @@ function ProductEdit({ params }) {
           setValue('slug', data.slug);
           setValue('price', data.price);
           setValue('image', data.image);
-          setValue('category', data.category);
-          setValue('brand', data.brand);
           setValue('featuredImage', data.featuredImage);
           setIsFeatured(data.isFeatured);
+          setValue('category', data.category);
+          setValue('brand', data.brand);
           setValue('countInStock', data.countInStock);
           setValue('description', data.description);
         } catch (err) {
@@ -101,7 +101,6 @@ function ProductEdit({ params }) {
       fetchData();
     }
   }, []);
-
   const uploadHandler = async (e, imageField = 'image') => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
@@ -116,8 +115,6 @@ function ProductEdit({ params }) {
       });
       dispatch({ type: 'UPLOAD_SUCCESS' });
       setValue(imageField, data.secure_url);
-      console.log('data', data);
-
       enqueueSnackbar('File uploaded successfully', { variant: 'success' });
     } catch (err) {
       dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
@@ -131,14 +128,16 @@ function ProductEdit({ params }) {
     price,
     category,
     image,
+    featuredImage,
     brand,
     countInStock,
     description,
-    featuredImage,
   }) => {
     closeSnackbar();
+
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
+
       await axios.put(
         `/api/admin/products/${productId}`,
         {
@@ -147,8 +146,8 @@ function ProductEdit({ params }) {
           price,
           category,
           image,
-          isFeatured,
-          featuredImage,
+          isFeatured: isFeatured ? isFeatured : false,
+          featuredImage: featuredImage ? featuredImage : '',
           brand,
           countInStock,
           description,
@@ -163,6 +162,7 @@ function ProductEdit({ params }) {
       enqueueSnackbar(getError(err), { variant: 'error' });
     }
   };
+
   return (
     <Layout title={`Edit Product ${productId}`}>
       <Grid container spacing={1}>
@@ -320,9 +320,11 @@ function ProductEdit({ params }) {
                         name="featuredImage"
                         control={control}
                         defaultValue=""
-                        rules={{
-                          required: true,
-                        }}
+                        rules={
+                          {
+                            // required: true,
+                          }
+                        }
                         render={({ field }) => (
                           <TextField
                             variant="outlined"
@@ -349,7 +351,6 @@ function ProductEdit({ params }) {
                       </Button>
                       {loadingUpload && <CircularProgress />}
                     </ListItem>
-
                     <ListItem>
                       <Controller
                         name="category"

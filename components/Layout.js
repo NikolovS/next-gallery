@@ -147,7 +147,7 @@ export default function Layout({ children, title, description }) {
               </IconButton>
               <NextLink href="/" passHref>
                 <Link>
-                  <Typography className={classes.brand}>amazona</Typography>
+                  <Typography className={classes.brand}>Yangog</Typography>
                 </Link>
               </NextLink>
             </Box>

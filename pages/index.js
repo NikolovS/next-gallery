@@ -36,7 +36,7 @@ export default function Home(props) {
 
   return (
     <Layout>
-      <Carousel className={classes.mt1} animation="slide">
+      <Carousel className={classes.mt1} animation="fade" height={200}>
         {featuredProducts.map((product) => (
           <NextLink
             key={product._id}

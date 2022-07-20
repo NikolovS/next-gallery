@@ -89,6 +89,10 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 5,
   },
   fullContainer: { height: '100vh' },
+  featuredImage: {
+    width: '100vw',
+    height: '20vh',
+  },
 }));
 
 export default useStyles;
